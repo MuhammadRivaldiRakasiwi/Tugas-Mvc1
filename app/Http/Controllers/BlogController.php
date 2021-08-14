@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Models\Blog;
 use Illuminate\Support\Facades\Storage;
@@ -98,5 +99,11 @@ class BlogController extends Controller
     {
         Blog::destroy($id);
         return redirect('/blog')->with('success', 'Data berhasil Di Hapus');
+    }
+
+    public function logout()
+    {
+        Auth::logout(); // menghapus session yang aktif
+        return redirect()->route('login');
     }
 }

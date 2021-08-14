@@ -14,6 +14,18 @@ use App\Http\Controllers\BlogController;
 |
 */
 
+Route::get('/', function () {
+    return view('auth.login');
+});
+
 Route::resource('blog', BlogController::class);
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('logout', [BlogController::class, 'logout'])->name('logout');
+ 
+
+Route::get('admin',[App\Http\Controllers\BlogController::class, 'index'])->name('admin')->middleware(['CheckRole:admin']);
